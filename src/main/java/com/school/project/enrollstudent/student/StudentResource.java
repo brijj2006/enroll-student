@@ -1,5 +1,6 @@
 package com.school.project.enrollstudent.student;
 
+import com.school.project.enrollstudent.exception.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,11 @@ public class StudentResource {
 
     @GetMapping(path = "/fetchStudents/class/{className}")
     public List<Student> fetchClassStudentsDetails(@PathVariable String className) {
-        return studentRepository.findByClassName(className);
+        List<Student> students = studentRepository.findByClassName(className);
+        if (students.size() == 0) {
+            throw new StudentNotFoundException("no student record found for class " + className);
+        }
+        return students;
     }
 
     @GetMapping(path = "/fetchStudents/id/{id}")
