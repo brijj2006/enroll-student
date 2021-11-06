@@ -1,19 +1,31 @@
 package com.school.project.enrollstudent.student;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "STUDENT")
 public class Student {
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private int id;
+
+    @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @Column(name = "LAST_NAME")
     private String lastName;
+
+    @Column(name = "CLASS_NAME")
     private String className;
+
+    @Column(name = "NATIONALITY")
     private String nationality;
+
+    public Student() {
+        
+    }
 
     public Student(int id, String firstName, String lastName, String className, String nationality) {
         this.id = id;
