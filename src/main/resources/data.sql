@@ -1,0 +1,5 @@
+insert into Student (ID, FIRST_NAME, LAST_NAME, CLASS_NAME, NATIONALITY) values(1000, 'Sachin', 'Tendulkar', '1 A', 'Indian')
+insert into Student (ID, FIRST_NAME, LAST_NAME, CLASS_NAME, NATIONALITY) values(1001, 'Brian', 'Lara', '1 A', 'West Indian')
+insert into Student (ID, FIRST_NAME, LAST_NAME, CLASS_NAME, NATIONALITY) values(1002, 'Ricky', 'Ponting', '1 A', 'Australian')
+insert into Student (ID, FIRST_NAME, LAST_NAME, CLASS_NAME, NATIONALITY) values(1003, 'Virat', 'Kohli', '1 B', 'Indian')
+insert into Student (ID, FIRST_NAME, LAST_NAME, CLASS_NAME, NATIONALITY) values(1004, 'Stevan', 'Smith', '1 C', 'Australian')
