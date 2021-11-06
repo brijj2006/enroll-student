@@ -1,11 +1,11 @@
 package com.school.project.enrollstudent.student;
 
+import com.school.project.enrollstudent.exception.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class StudentResource {
@@ -20,12 +20,20 @@ public class StudentResource {
 
     @GetMapping(path = "/fetchStudents/class/{className}")
     public List<Student> fetchClassStudentsDetails(@PathVariable String className) {
-        return studentRepository.findByClassName(className);
+        List<Student> students = studentRepository.findByClassName(className);
+        if (students.size() == 0) {
+            throw new StudentNotFoundException("no student record found for class - " + className);
+        }
+        return students;
     }
 
     @GetMapping(path = "/fetchStudents/id/{id}")
     public Student fetchStudentDetail(@PathVariable int id) {
-        return studentRepository.findById(id);
+        Student student = studentRepository.findById(id);
+        if (student == null) {
+            throw new StudentNotFoundException("no student record found with Id - " + id);
+        }
+        return student;
     }
 
     /*@GetMapping(path = "/fetchStudents")
@@ -62,7 +70,6 @@ public class StudentResource {
             }
             studentRepository.save(studentToUpdate);
         }
-
     }
 
     @DeleteMapping(path = "/students")
