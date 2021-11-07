@@ -18,7 +18,6 @@ import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,21 +60,6 @@ public class Stepdefs {
         CloseableHttpResponse response = client.execute(httpGet);
         System.out.println("Status : " + response.getStatusLine().getStatusCode());
         client.close();
-    }
-
-    private String convertInputStreamToString(InputStream is) throws IOException {
-
-        ByteArrayOutputStream result = new ByteArrayOutputStream();
-        byte[] buffer = new byte[8192];
-        int length;
-        while ((length = is.read(buffer)) != -1) {
-            result.write(buffer, 0, length);
-        }
-
-        // Java 1.1
-        return result.toString(StandardCharsets.UTF_8.name());
-
-
     }
 
     @Given("user is entitled to access the school record")
