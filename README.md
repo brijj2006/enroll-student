@@ -25,7 +25,7 @@ develop REST API for student enrolment project for a school
 
 ##Steps to trigger BDD tests
 
-- There are three diff ways to trigger the tests
+- There are five diff ways to trigger the tests
 
 1. Go to Github Actions -> Workflows -> Java CI with Maven -> Run Workflow
 2. Tests will be automatically tiggerred on every pull request 
