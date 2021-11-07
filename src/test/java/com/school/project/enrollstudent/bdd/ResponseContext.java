@@ -7,6 +7,7 @@ public class ResponseContext {
     private static String lastName;
     private static String className;
     private static String nationality;
+    private static String message;
 
     public static String getStatusCode() {
         return statusCode;
@@ -48,4 +49,11 @@ public class ResponseContext {
         ResponseContext.nationality = nationality;
     }
 
+    public static String getMessage() {
+        return message;
+    }
+
+    public static void setMessage(String message) {
+        ResponseContext.message = message;
+    }
 }
