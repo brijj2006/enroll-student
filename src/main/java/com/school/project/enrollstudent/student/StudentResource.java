@@ -1,6 +1,8 @@
 package com.school.project.enrollstudent.student;
 
 import com.school.project.enrollstudent.exception.StudentNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 @RestController
 public class StudentResource {
+
+    private static final Logger logger = LoggerFactory.getLogger(StudentResource.class);
 
     @Autowired
     private StudentRepository studentRepository;
@@ -36,46 +40,39 @@ public class StudentResource {
         return student;
     }
 
-    /*@GetMapping(path = "/fetchStudents")
-    public List<Student> fetchStudent(@RequestParam String className) {
-        return studentRepository.findByClassName(className);
-    }*/
-
-    /*@GetMapping(path = "/fetchStudents")
-    public Student fetchStudent(@RequestParam int id) {
-        return studentRepository.findById(id);
-    }*/
-
     @PostMapping(path = "/students")
     public void enrollStudent(@Valid @RequestBody Student student) {
         studentRepository.save(student);
-
     }
 
     @PutMapping(path = "/students")
     public void updateStudent(@Valid @RequestBody Student student) {
-        Student studentToUpdate = studentRepository.findById(student.getId());
-        if (studentToUpdate != null) {
-            if (student.getFirstName() != null) {
-                studentToUpdate.setFirstName(student.getFirstName());
-            }
-            if (student.getLastName() != null) {
-                studentToUpdate.setLastName(student.getLastName());
-            }
-            if (student.getClassName() != null) {
-                studentToUpdate.setClassName(student.getClassName());
-            }
-            if (student.getNationality() != null) {
-                studentToUpdate.setNationality(student.getNationality());
-            }
-            studentRepository.save(studentToUpdate);
+        int id = student.getId();
+        Student studentToUpdate = studentRepository.findById(id);
+        if (studentToUpdate == null) {
+            throw new StudentNotFoundException("student does not exist with Id - " + id);
+        } else if (student.getFirstName() != null) {
+            studentToUpdate.setFirstName(student.getFirstName());
+        } else if (student.getLastName() != null) {
+            studentToUpdate.setLastName(student.getLastName());
+        } else if (student.getClassName() != null) {
+            studentToUpdate.setClassName(student.getClassName());
+        } else if (student.getNationality() != null) {
+            studentToUpdate.setNationality(student.getNationality());
         }
+        studentRepository.save(studentToUpdate);
     }
 
     @DeleteMapping(path = "/students")
     public void deleteStudent(@Valid @RequestBody Student student) {
         int id = student.getId();
-        studentRepository.deleteById(id);
+        Student studentToDelete = studentRepository.findById(id);
+        if (studentToDelete == null) {
+            throw new StudentNotFoundException("student does not exist with Id - " + id);
+        } else {
+            studentRepository.deleteById(id);
+            logger.info("deleted student record with Id - " + id);
+        }
     }
 
 }
