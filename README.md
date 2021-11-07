@@ -1,2 +1,63 @@
 # enroll-student
 develop REST API for student enrolment project for a school
+
+- Retrieve all students          - GET     /fetchStudents
+- Enroll a student               - POST    /students
+- Retrieve student by class      - GET     /fetchStudents/class/{className} -> /fetchStudents/class/1A
+- Retrieve student by Id         - GET     /fetchStudents/id/{id} -> /fetchStudents/id/1000
+- Delete a student               - DELETE  /students
+- Update a student               - UPDATE  /students
+
+
+##Coverage
+- Send JSON as POST, PUT, DELETE and GET requests to REST endpoints
+- SpringBoot implementation to develop rest api
+- Used JPA-H2 DB for persisting data 
+- Pre-populating few of the student data in H2 DB 
+- Exception handling for few invalid requests
+- BDD tests in Cucumber (GET/POST methods) : Included both positive and negative scenarios
+- Reporting for Cucumber
+- Used Logger - needs more logging
+- REST API documentation using Swagger
+- REST API health check using SpringBoot Actuator
+- CI/CD : Github Actions integration for automated BDD test trigger on each pull and merge request to master
+(Tests failed since the automated application deployment was incomplete)
+
+##Steps to trigger BDD tests
+
+- There are three diff ways to trigger the tests
+
+1. Go to Github Actions -> Workflows -> Java CI with Maven -> Run Workflow
+2. Tests will be automatically tiggerred on every pull request 
+3. Tests will be automatically triggerred on every merge on master
+4. Manually right click on RunTest (Cucumber-JUnit runner) and run the BDD tests
+5. Run command on CLI : mvn test
+
+Cucumber reports can be found on  : reports.cucumber.io portal
+The link can be captured from the log terminal once the tests complete.
+Eg. https://reports.cucumber.io/reports/356db68d-e692-452b-b8c4-d584691db8a5
+
+
+##To-Do
+
+- Fix bugs in update/post api calls
+- Tests for update/delete api calls
+- More test coverage (field validations and workflows)
+- Automated application deployment
+- Code coverage - SonarQube integration
+- Unit test cases
+
+
+##References
+Swagger API Docs : 
+
+http://localhost:8080/v2/api-docs
+
+http://localhost:8080/swagger-ui.html
+
+Springboot actuator (Health check for the API's) :
+
+http://localhost:8080/actuator
+
+Postman Requests :  
+Link

@@ -1,5 +1,8 @@
-Feature: Search and get the student details who are enrolled to school
+Feature: Positive Scenarios - Search and get the student details who are enrolled to school
 
+  @regression
+  @positive
+  @search_all
   Scenario: Get the details of all the students enrolled to school
     Given user is entitled to access the school record
     When user search for all student records
@@ -7,6 +10,9 @@ Feature: Search and get the student details who are enrolled to school
       | status |
       | 200    |
 
+  @regression
+  @positive
+  @search_by_id
   Scenario: Get the details of the student based on the Id
     Given user is entitled to access the school record
     When user search student record for id 1000
@@ -14,6 +20,10 @@ Feature: Search and get the student details who are enrolled to school
       | status | firstName | lastName  | className | nationality |
       | 200    | Sachin    | Tendulkar | 1A        | Indian      |
 
+  @regression
+  @positive
+  @enroll_student
+  @search_by_class
   Scenario: enroll and verify the creation of new student
     Given user is entitled to access the school record
     When enroll a new student
