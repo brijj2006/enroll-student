@@ -59,6 +59,164 @@ Swagger API Doc
 ![image](https://user-images.githubusercontent.com/50976445/140671491-5e0ffe4e-8499-4edb-8c66-dfb8988734aa.png)
 
 
+## API
+
+- Retrieve all students          - GET     /fetchStudents
+
+Request
+```
+http://localhost:8080/fetchStudents
+```
+Response
+```json
+[
+    {
+        "id": 1000,
+        "firstName": "Sachin",
+        "lastName": "Tendulkar",
+        "className": "1A",
+        "nationality": "Indian"
+    },
+    {
+        "id": 1001,
+        "firstName": "Brian",
+        "lastName": "Lara",
+        "className": "1A",
+        "nationality": "West Indian"
+    },
+    {
+        "id": 1002,
+        "firstName": "Ricky",
+        "lastName": "Ponting",
+        "className": "1A",
+        "nationality": "Australian"
+    },
+    {
+        "id": 1003,
+        "firstName": "Virat",
+        "lastName": "Kohli",
+        "className": "1B",
+        "nationality": "Indian"
+    },
+    {
+        "id": 1004,
+        "firstName": "Stevan",
+        "lastName": "Smith",
+        "className": "1C",
+        "nationality": "Australian"
+    }
+]
+```
+
+- Retrieve student by class      - GET     /fetchStudents/class/{className}
+
+Request
+```
+http://localhost:8080//fetchStudents/class/1A
+```
+
+Response
+```json
+[
+    {
+        "id": 1000,
+        "firstName": "Sachin",
+        "lastName": "Tendulkar",
+        "className": "1A",
+        "nationality": "Indian"
+    },
+    {
+        "id": 1001,
+        "firstName": "Brian",
+        "lastName": "Lara",
+        "className": "1A",
+        "nationality": "West Indian"
+    },
+    {
+        "id": 1002,
+        "firstName": "Ricky",
+        "lastName": "Ponting",
+        "className": "1A",
+        "nationality": "Australian"
+    }
+]
+```
+
+- Retrieve student by Id         - GET     /fetchStudents/id/{id}
+
+Request
+```
+http://localhost:8080//fetchStudents/id/1000
+```
+
+Response
+```json
+{
+    "id": 1000,
+    "firstName": "Sachin",
+    "lastName": "Tendulkar",
+    "className": "1A",
+    "nationality": "Indian"
+}
+```
+
+- Enroll a student               - POST    /students
+
+Request
+```
+http://localhost:8080/students
+```
+```json
+{
+    "firstName": "Brijendra",
+    "lastName": "Singh",
+    "className": "1 A",
+    "nationality": "Indian"
+}
+```
+
+Response
+```
+200 OK
+```
+
+
+- Update a student               - UPDATE  /students
+
+Request
+```
+http://localhost:8080/students
+```
+```json
+{
+    "id": 2,
+    "className": "1 B",
+    "nationality": "Indian"
+}
+```
+
+Response
+```
+200 OK
+```
+
+- Delete a student               - DELETE  /students
+
+Request
+```
+http://localhost:8080/students
+```
+```json
+{
+    "id": 2
+}
+```
+
+Response
+```
+200 OK
+```
+
 
 
 ## To-Do
