@@ -61,7 +61,7 @@ Swagger API Doc
 
 ## API
 
-# Retrieve all students          
+### Retrieve all students          
 
 - GET     /fetchStudents
 
@@ -110,7 +110,7 @@ Response
 ]
 ```
 
-# Retrieve student by class      
+### Retrieve student by class      
 - GET     /fetchStudents/class/{className}
 
 Request
@@ -145,7 +145,7 @@ Response
 ]
 ```
 
-# Retrieve student by Id         
+### Retrieve student by Id         
 - GET     /fetchStudents/id/{id}
 
 Request
@@ -164,7 +164,7 @@ Response
 }
 ```
 
-# Enroll a student               
+### Enroll a student               
 - POST    /students
 
 Request
@@ -186,7 +186,7 @@ Response
 ```
 
 
-# Update a student               
+### Update a student               
 - UPDATE  /students
 
 Request
@@ -206,7 +206,7 @@ Response
 200 OK
 ```
 
-# Delete a student               
+### Delete a student               
 - DELETE  /students
 
 Request
