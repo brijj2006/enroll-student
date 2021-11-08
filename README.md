@@ -37,6 +37,7 @@ develop REST API for student enrolment project for a school
 4. Manually right click on RunTest (Cucumber-JUnit runner) and run the BDD tests
 5. Run command on CLI : mvn test
 
+
 ![image](https://user-images.githubusercontent.com/50976445/140659125-5c7cd225-2793-41a4-90dd-be505d9fcbe4.png)
 
 
@@ -46,11 +47,17 @@ Eg. https://reports.cucumber.io/reports/356db68d-e692-452b-b8c4-d584691db8a5
 ![image](https://user-images.githubusercontent.com/50976445/140659092-4642d897-8f6f-4ff4-9d5f-f5f066e358de.png)
 
 
+
 Passed Report
 ![image](https://user-images.githubusercontent.com/50976445/140659036-98f3f6e6-eb50-4474-86a8-834de926097b.png)
 
 Failed Report
 ![image](https://user-images.githubusercontent.com/50976445/140659068-0023b8cb-6ee2-4c0e-b842-e8344c0595c2.png)
+
+
+Swagger API Doc
+![image](https://user-images.githubusercontent.com/50976445/140671491-5e0ffe4e-8499-4edb-8c66-dfb8988734aa.png)
+
 
 
 
