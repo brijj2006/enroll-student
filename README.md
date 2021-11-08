@@ -2,12 +2,12 @@
 
 develop REST API for student enrolment project for a school
 
-- Retrieve all students          - GET     /fetchStudents
-- Enroll a student               - POST    /students
-- Retrieve student by class      - GET     /fetchStudents/class/{className} -> /fetchStudents/class/1A
-- Retrieve student by Id         - GET     /fetchStudents/id/{id} -> /fetchStudents/id/1000
-- Delete a student               - DELETE  /students
-- Update a student               - UPDATE  /students
+- [Retrieve all students          - GET     /fetchStudents](#retrieve-all-students)
+- [Enroll a student               - POST    /students](#enroll-a-student)
+- [Retrieve student by class      - GET     /fetchStudents/class/{className} -> /fetchStudents/class/1A](#retrieve-student-by-class)
+- [Retrieve student by Id         - GET     /fetchStudents/id/{id} -> /fetchStudents/id/1000](#retrieve-student-by-id)
+- [Delete a student               - DELETE  /students](#delete-a-student)
+- [Update a student               - UPDATE  /students](#update-a-student)
 
 
 
@@ -61,7 +61,9 @@ Swagger API Doc
 
 ## API
 
-- Retrieve all students          - GET     /fetchStudents
+# Retrieve all students          
+
+- GET     /fetchStudents
 
 Request
 ```
@@ -108,7 +110,8 @@ Response
 ]
 ```
 
-- Retrieve student by class      - GET     /fetchStudents/class/{className}
+# Retrieve student by class      
+- GET     /fetchStudents/class/{className}
 
 Request
 ```
@@ -142,7 +145,8 @@ Response
 ]
 ```
 
-- Retrieve student by Id         - GET     /fetchStudents/id/{id}
+# Retrieve student by Id         
+- GET     /fetchStudents/id/{id}
 
 Request
 ```
@@ -160,7 +164,8 @@ Response
 }
 ```
 
-- Enroll a student               - POST    /students
+# Enroll a student               
+- POST    /students
 
 Request
 ```
@@ -181,7 +186,8 @@ Response
 ```
 
 
-- Update a student               - UPDATE  /students
+# Update a student               
+- UPDATE  /students
 
 Request
 ```
@@ -200,7 +206,8 @@ Response
 200 OK
 ```
 
-- Delete a student               - DELETE  /students
+# Delete a student               
+- DELETE  /students
 
 Request
 ```
