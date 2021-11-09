@@ -23,6 +23,7 @@ develop REST API for student enrolment project for a school
 - Used Logger - needs more logging
 - REST API documentation using Swagger
 - REST API health check using SpringBoot Actuator
+- Automated web-services deployment to Heroku Cloud Platform
 - CI/CD : Github Actions integration for automated BDD test trigger on each pull and merge request to master
 (Tests failed since the automated application deployment was incomplete)
 
@@ -31,14 +32,17 @@ develop REST API for student enrolment project for a school
 
 - There are five diff ways to trigger the tests
 
-1. Go to Github Actions -> Workflows -> Java CI with Maven -> Run Workflow
+1. Go to Github Actions -> Workflows -> Deploy and Test -> Run Workflow
 2. Tests will be automatically tiggerred on every pull request 
 3. Tests will be automatically triggerred on every merge on master
 4. Manually right click on RunTest (Cucumber-JUnit runner) and run the BDD tests
 5. Run command on CLI : mvn test
 
+Automated deployment and Test using Github Actions
+![image](https://user-images.githubusercontent.com/50976445/140967000-96f750b8-fa5f-4711-a61c-e69a38b47a15.png)
 
-![image](https://user-images.githubusercontent.com/50976445/140659125-5c7cd225-2793-41a4-90dd-be505d9fcbe4.png)
+Automated deployment on Heroku Cloud Platform
+![image](https://user-images.githubusercontent.com/50976445/140968578-e1690924-21a9-442f-8f8b-986a7c676251.png)
 
 
 Cucumber reports can be found on  : reports.cucumber.io portal
@@ -49,6 +53,10 @@ Eg. https://reports.cucumber.io/reports/356db68d-e692-452b-b8c4-d584691db8a5
 
 
 Passed Report
+
+![image](https://user-images.githubusercontent.com/50976445/140967188-437590eb-c21a-4da4-bece-302a142cf7dd.png)
+
+
 ![image](https://user-images.githubusercontent.com/50976445/140659036-98f3f6e6-eb50-4474-86a8-834de926097b.png)
 
 Failed Report
@@ -56,7 +64,8 @@ Failed Report
 
 
 Swagger API Doc
-![image](https://user-images.githubusercontent.com/50976445/140671491-5e0ffe4e-8499-4edb-8c66-dfb8988734aa.png)
+![image](https://user-images.githubusercontent.com/50976445/140967536-108733fb-2035-4d62-a54b-b3406c4e89ac.png)
+
 
 
 ## API
@@ -182,7 +191,7 @@ http://localhost:8080/students
 
 Response
 ```
-200 OK
+204 No Content
 ```
 
 
@@ -203,7 +212,7 @@ http://localhost:8080/students
 
 Response
 ```
-200 OK
+204 No Content
 ```
 
 ### Delete a student               
@@ -221,17 +230,15 @@ http://localhost:8080/students
 
 Response
 ```
-200 OK
+204 No Content
 ```
 
 
 
 ## To-Do
 
-- Fix bugs in update/post api calls
 - Tests for update/delete api calls
-- More test coverage (field validations and workflows)
-- Automated application deployment
+- More test coverage
 - Code coverage - SonarQube integration
 - Unit test cases
 
@@ -241,11 +248,11 @@ Response
 
 Swagger API Docs : 
 
-http://localhost:8080/v2/api-docs
+https://enroll-student.herokuapp.com/v2/api-docs
 
-http://localhost:8080/swagger-ui.html
+http://enroll-student.herokuapp.com/swagger-ui.html
 
 Springboot actuator (Health check for the API's) :
 
-http://localhost:8080/actuator
+https://enroll-student.herokuapp.com/actuator
 
