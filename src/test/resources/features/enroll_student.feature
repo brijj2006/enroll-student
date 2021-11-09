@@ -31,7 +31,7 @@ Feature: Positive Scenarios - Search and get the student details who are enrolle
       | Brijendra | Singh    | 2A        | Indian      |
     Then record is created successfully
       | status |
-      | 200    |
+      | 204    |
     When user search student record for class "2A"
     Then existing record of students is fetched
       | status | firstName | lastName | className |
