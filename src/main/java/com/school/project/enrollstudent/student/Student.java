@@ -1,7 +1,12 @@
 package com.school.project.enrollstudent.student;
 
-import javax.persistence.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+
+@ApiModel(description = "student details")
 @Entity
 @Table(name = "STUDENT")
 public class Student {
@@ -12,6 +17,8 @@ public class Student {
     private int id;
 
     @Column(name = "FIRST_NAME")
+    @Size(min = 2, message = "first name should be minimum 2 chars")
+    @ApiModelProperty(notes = "first name should be minimum 2 chars")
     private String firstName;
 
     @Column(name = "LAST_NAME")
@@ -24,7 +31,7 @@ public class Student {
     private String nationality;
 
     public Student() {
-        
+
     }
 
     public Student(int id, String firstName, String lastName, String className, String nationality) {
