@@ -83,7 +83,7 @@ Swagger API Doc
 
 Request
 ```
-http://localhost:8080/fetchStudents
+https://enroll-student.herokuapp.com/fetchStudents
 ```
 Response
 ```json
@@ -131,7 +131,7 @@ Response
 
 Request
 ```
-http://localhost:8080//fetchStudents/class/1A
+https://enroll-student.herokuapp.com/fetchStudents/class/1A
 ```
 
 Response
@@ -166,7 +166,7 @@ Response
 
 Request
 ```
-http://localhost:8080//fetchStudents/id/1000
+https://enroll-student.herokuapp.com/fetchStudents/id/1000
 ```
 
 Response
@@ -185,7 +185,7 @@ Response
 
 Request
 ```
-http://localhost:8080/students
+https://enroll-student.herokuapp.com/students
 ```
 ```json
 {
@@ -207,7 +207,7 @@ Response
 
 Request
 ```
-http://localhost:8080/students
+https://enroll-student.herokuapp.com/students
 ```
 ```json
 {
@@ -227,7 +227,7 @@ Response
 
 Request
 ```
-http://localhost:8080/students
+https://enroll-student.herokuapp.com/students
 ```
 ```json
 {
