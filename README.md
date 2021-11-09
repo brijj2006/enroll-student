@@ -1,6 +1,30 @@
 # enroll-student
 
-develop REST API for student enrolment project for a school
+Develop REST API's for student enrolment project of school
+
+## Tech Stack
+- Language : Java
+- Framework : SpringBoot/JPA(Hibernate)
+- E2E Tests : Cucumber (BDD)
+- Cloud Platform : Heroku
+- CI/CD : GitHub Actions/Workflows
+
+## Coverage
+
+- Send JSON as POST, PUT, DELETE and GET requests to REST endpoints
+- SpringBoot implementation to develop rest api
+- Used JPA-H2 DB for persisting data 
+- Pre-populating student data in H2 DB 
+- Exception handling for invalid requests
+- BDD tests in Cucumber : Included both positive and negative scenarios
+- Reporting for Cucumber
+- Application logging
+- REST API Specs using Swagger
+- REST API health check using SpringBoot Actuator
+- CI/CD : Github Actions integration with Heroku cloud platform and Cucumber to trigger automated deployment and regression test on each pull and merge request to master
+
+
+## API Details
 
 - [Retrieve all students          - GET     /fetchStudents](#retrieve-all-students)
 - [Enroll a student               - POST    /students](#enroll-a-student)
@@ -9,23 +33,6 @@ develop REST API for student enrolment project for a school
 - [Delete a student               - DELETE  /students](#delete-a-student)
 - [Update a student               - UPDATE  /students](#update-a-student)
 
-
-
-## Coverage
-
-- Send JSON as POST, PUT, DELETE and GET requests to REST endpoints
-- SpringBoot implementation to develop rest api
-- Used JPA-H2 DB for persisting data 
-- Pre-populating few of the student data in H2 DB 
-- Exception handling for few invalid requests
-- BDD tests in Cucumber (GET/POST methods) : Included both positive and negative scenarios
-- Reporting for Cucumber
-- Used Logger - needs more logging
-- REST API documentation using Swagger
-- REST API health check using SpringBoot Actuator
-- Automated web-services deployment to Heroku Cloud Platform
-- CI/CD : Github Actions integration for automated BDD test trigger on each pull and merge request to master
-(Tests failed since the automated application deployment was incomplete)
 
 
 ## Steps to trigger BDD tests
