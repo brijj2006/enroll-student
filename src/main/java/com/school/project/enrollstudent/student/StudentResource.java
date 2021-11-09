@@ -26,7 +26,8 @@ public class StudentResource {
     public List<Student> fetchClassStudentsDetails(@PathVariable String className) {
         List<Student> students = studentRepository.findByClassName(className);
         if (students.size() == 0) {
-            throw new StudentNotFoundException("no student record found for class - " + className);
+            logger.error("no student record found for class : " + className);
+            throw new StudentNotFoundException("no student record found for class : " + className);
         }
         return students;
     }
@@ -35,7 +36,8 @@ public class StudentResource {
     public Student fetchStudentDetail(@PathVariable int id) {
         Student student = studentRepository.findById(id);
         if (student == null) {
-            throw new StudentNotFoundException("no student record found with Id - " + id);
+            logger.error("no student record found with Id : " + id);
+            throw new StudentNotFoundException("no student record found with Id : " + id);
         }
         return student;
     }
@@ -50,15 +52,21 @@ public class StudentResource {
         int id = student.getId();
         Student studentToUpdate = studentRepository.findById(id);
         if (studentToUpdate == null) {
-            throw new StudentNotFoundException("student does not exist with Id - " + id);
-        } else if (student.getFirstName() != null) {
-            studentToUpdate.setFirstName(student.getFirstName());
-        } else if (student.getLastName() != null) {
-            studentToUpdate.setLastName(student.getLastName());
-        } else if (student.getClassName() != null) {
-            studentToUpdate.setClassName(student.getClassName());
-        } else if (student.getNationality() != null) {
-            studentToUpdate.setNationality(student.getNationality());
+            logger.error("student does not exist with Id : " + id);
+            throw new StudentNotFoundException("student does not exist with Id : " + id);
+        } else {
+            if (student.getFirstName() != null) {
+                studentToUpdate.setFirstName(student.getFirstName());
+            }
+            if (student.getLastName() != null) {
+                studentToUpdate.setLastName(student.getLastName());
+            }
+            if (student.getClassName() != null) {
+                studentToUpdate.setClassName(student.getClassName());
+            }
+            if (student.getNationality() != null) {
+                studentToUpdate.setNationality(student.getNationality());
+            }
         }
         studentRepository.save(studentToUpdate);
     }
@@ -68,10 +76,11 @@ public class StudentResource {
         int id = student.getId();
         Student studentToDelete = studentRepository.findById(id);
         if (studentToDelete == null) {
-            throw new StudentNotFoundException("student does not exist with Id - " + id);
+            logger.error("student does not exist with Id : " + id);
+            throw new StudentNotFoundException("student does not exist with Id : " + id);
         } else {
             studentRepository.deleteById(id);
-            logger.info("deleted student record with Id - " + id);
+            logger.info("deleted student record with Id : " + id);
         }
     }
 
