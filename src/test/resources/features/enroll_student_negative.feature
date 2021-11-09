@@ -8,7 +8,7 @@ Feature: Negative Scenarios - Search and get the student details who are enrolle
     When user search student record for id 10000
     Then existing record of students is fetched
       | status | message                                 |
-      | 404    | no student record found with Id - 10000 |
+      | 404    | no student record found with Id : 10000 |
 
   @regression
   @negative
@@ -18,4 +18,4 @@ Feature: Negative Scenarios - Search and get the student details who are enrolle
     When user search student record for class "10A"
     Then existing record of students is fetched
       | status | message                                 |
-      | 404    | no student record found for class - 10A |
+      | 404    | no student record found for class : 10A |

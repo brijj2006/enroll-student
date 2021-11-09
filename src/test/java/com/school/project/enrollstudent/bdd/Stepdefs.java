@@ -18,7 +18,9 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import java.io.*;
 import java.util.List;
@@ -26,8 +28,27 @@ import java.util.Map;
 import java.util.Set;
 
 @CucumberContextConfiguration
+@TestPropertySource("classpath:test.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class Stepdefs {
+
+    @Value("${url_get_students}")
+    private String url_get_students;
+
+    @Value("${url_get_students_byClass}")
+    private String url_get_students_byClass;
+
+    @Value("${url_get_students_byId}")
+    private String url_get_students_byId;
+
+    @Value("${url_students}")
+    private String url_students;
+
+    @Value("${header_accept}")
+    private String header_accept;
+
+    @Value("${header_contentType}")
+    private String header_contentType;
 
     private static final Logger logger = LoggerFactory.getLogger(Stepdefs.class);
 
@@ -47,19 +68,11 @@ public class Stepdefs {
         httpPost.setEntity(stringEntity);
 
         /*set request headers*/
-        httpPost.setHeader("Accept", "application/json");
-        httpPost.setHeader("Content-Type", "application/json");
+        httpPost.setHeader("Accept", header_accept);
+        httpPost.setHeader("Content-Type", header_contentType);
 
         CloseableHttpResponse response = client.execute(httpPost);
         return response;
-    }
-
-    public void getRequest() throws IOException {
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://localhost:8080/fetchStudents");
-        CloseableHttpResponse response = client.execute(httpGet);
-        System.out.println("Status : " + response.getStatusLine().getStatusCode());
-        client.close();
     }
 
     @Given("user is entitled to access the school record")
@@ -69,7 +82,7 @@ public class Stepdefs {
 
     @When("user search for all student records")
     public void userSearchForAllStudentRecords() throws IOException {
-        CloseableHttpResponse response = getResponse("http://localhost:8080/fetchStudents");
+        CloseableHttpResponse response = getResponse(url_get_students);
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
     }
 
@@ -106,7 +119,7 @@ public class Stepdefs {
 
     @When("user search student record for id {int}")
     public void userSearchStudentRecordForId(int id) throws IOException, JSONException {
-        CloseableHttpResponse response = getResponse("http://localhost:8080//fetchStudents/id/" + id);
+        CloseableHttpResponse response = getResponse(url_get_students_byId + "/" + id);
         String json = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
 
         JSONObject jsonObject = new JSONObject(json);
@@ -144,7 +157,7 @@ public class Stepdefs {
         String postBody = requestBody.toString();
         logger.info(postBody);
 
-        CloseableHttpResponse response = postResponse("http://localhost:8080/students", postBody);
+        CloseableHttpResponse response = postResponse(url_students, postBody);
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
     }
 
@@ -180,7 +193,7 @@ public class Stepdefs {
 
     @When("user search student record for class {string}")
     public void userSearchStudentRecordForClass(String className) throws IOException, JSONException {
-        CloseableHttpResponse response = getResponse("http://localhost:8080//fetchStudents/class/" + className);
+        CloseableHttpResponse response = getResponse(url_get_students_byClass + "/" + className);
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
         String json = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
 
