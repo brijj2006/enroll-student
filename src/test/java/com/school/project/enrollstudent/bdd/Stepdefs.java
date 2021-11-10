@@ -7,11 +7,6 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,7 +25,9 @@ import java.util.Set;
 @CucumberContextConfiguration
 @TestPropertySource("classpath:test.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class Stepdefs {
+public class Stepdefs extends Utils {
+
+    private static final Logger logger = LoggerFactory.getLogger(Stepdefs.class);
 
     @Value("${url_get_students}")
     private String url_get_students;
@@ -44,41 +41,9 @@ public class Stepdefs {
     @Value("${url_students}")
     private String url_students;
 
-    @Value("${header_accept}")
-    private String header_accept;
-
-    @Value("${header_contentType}")
-    private String header_contentType;
-
-    private static final Logger logger = LoggerFactory.getLogger(Stepdefs.class);
-
-    public CloseableHttpResponse getResponse(String uri) throws IOException {
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = client.execute(httpGet);
-        return response;
-    }
-
-    public CloseableHttpResponse postResponse(String uri, String requestBody) throws IOException {
-        CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(uri);
-
-        /*set request body*/
-        StringEntity stringEntity = new StringEntity(requestBody);
-        httpPost.setEntity(stringEntity);
-
-        /*set request headers*/
-        httpPost.setHeader("Accept", header_accept);
-        httpPost.setHeader("Content-Type", header_contentType);
-
-        CloseableHttpResponse response = client.execute(httpPost);
-        return response;
-    }
-
     @Given("user is entitled to access the school record")
     public void userIsEntitledToAccessTheSchoolRecord() {
     }
-
 
     @When("user search for all student records")
     public void userSearchForAllStudentRecords() throws IOException {
@@ -114,7 +79,6 @@ public class Stepdefs {
                 }
             }
         });
-
     }
 
     @When("user search student record for id {int}")
@@ -136,28 +100,8 @@ public class Stepdefs {
     }
 
     @When("enroll a new student")
-    public void enrollANewStudent(DataTable table) throws IOException {
-        StringBuilder requestBody = new StringBuilder();
-        requestBody.append("{");
-        int i = 1;
-        List<Map<String, String>> maps = table.asMaps(String.class, String.class);
-        for (Map map : maps) {
-            Set<String> keys = map.keySet();
-            for (String key : keys) {
-                requestBody.append("\"" + key + "\" : \"" + map.get(key) + "\"");
-                if (i == keys.size()) {
-                    break;
-                } else {
-                    requestBody.append(",");
-                    i = i + 1;
-                }
-            }
-            requestBody.append("}");
-        }
-        String postBody = requestBody.toString();
-        logger.info(postBody);
-
-        CloseableHttpResponse response = postResponse(url_students, postBody);
+    public void enrollANewStudent(DataTable dataTable) throws IOException {
+        CloseableHttpResponse response = postResponse(url_students, createRequestBody(dataTable));
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
     }
 
@@ -211,4 +155,9 @@ public class Stepdefs {
         }
     }
 
+    @When("update an existing student record")
+    public void updateAnExistingStudentRecord(DataTable dataTable) throws IOException {
+        CloseableHttpResponse response = putResponse(url_students, createRequestBody(dataTable));
+        ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+    }
 }

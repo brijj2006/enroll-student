@@ -38,3 +38,39 @@ Feature: Positive Scenarios - Search and get the student details who are enrolle
       | 200    | Brijendra | Singh    | 2A        |
 
 
+  @regression
+  @positive
+  @update_student
+  @search_by_id
+  Scenario: update and verify the record of an existing student
+    Given user is entitled to access the school record
+    When update an existing student record
+      | id   | firstName | lastName | className | nationality   |
+      | 1001 | Jack      | Kallis   | 3B        | South African |
+    Then record is created successfully
+      | status |
+      | 204    |
+    When user search student record for id 1001
+    Then existing record of students is fetched
+      | status | firstName | lastName | className | nationality   |
+      | 200    | Jack      | Kallis   | 3B        | South African |
+
+
+  @regression
+  @positive
+  @update_student
+  @search_by_id
+  Scenario: update and verify the partial record details of an existing student
+    Given user is entitled to access the school record
+    When update an existing student record
+      | id   | firstName | lastName |
+      | 1002 | David     | Warner   |
+    Then record is created successfully
+      | status |
+      | 204    |
+    When user search student record for id 1002
+    Then existing record of students is fetched
+      | status | firstName | lastName | className | nationality |
+      | 200    | David     | Warner   | 1A        | Australian  |
+
+
