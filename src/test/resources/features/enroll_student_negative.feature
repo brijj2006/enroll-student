@@ -19,3 +19,21 @@ Feature: Negative Scenarios - Search and get the student details who are enrolle
     Then existing record of students is fetched
       | status | message                                 |
       | 404    | no student record found for class : 10A |
+
+#  @regression
+#  @negative
+#  @delete_student
+#  Scenario: delete and verify the same record cannot be deleted again
+#    Given user is entitled to access the school record
+#    When delete an existing student record
+#      | id   |
+#      | 1003 |
+#    Then record is executed successfully
+#      | status |
+#      | 204    |
+#    When delete an existing student record
+#      | id   |
+#      | 1003 |
+#    Then record is executed successfully
+#      | status | message                               |
+#      | 404    | student does not exist with Id : 1003 |
