@@ -56,7 +56,7 @@ Feature: Positive Scenarios - Search and get the student details who are enrolle
     Examples:
       | firstName | lastName | className | nationality   |
       | Jack      | Kallis   | 4A        | South African |
-      | Micheal   | Holder   | 4B        | West Indian   |
+      | Micheal   | Holding  | 4B        | West Indian   |
       | Gary      | Kirsten  | 5A        | South African |
       | James     | Anderson | 6B        | British       |
 
@@ -68,15 +68,15 @@ Feature: Positive Scenarios - Search and get the student details who are enrolle
   Scenario: update and verify the record of an existing student
     Given user is entitled to access the school record
     When update an existing student record
-      | id   | firstName | lastName | className | nationality   |
-      | 1001 | Jack      | Kallis   | 3B        | South African |
+      | id   | firstName | lastName | className | nationality |
+      | 1001 | Stephan   | Flemming | 6C        | New Zealand |
     Then record is executed successfully
       | status |
       | 204    |
     When user search student record for id 1001
     Then existing record of students is fetched
-      | status | firstName | lastName | className | nationality   |
-      | 200    | Jack      | Kallis   | 3B        | South African |
+      | status | firstName | lastName | className | nationality |
+      | 200    | Stephan   | Flemming | 6C        | New Zealand |
 
 
   @regression
