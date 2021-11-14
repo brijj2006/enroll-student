@@ -105,8 +105,8 @@ public class Stepdefs extends Utils {
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
     }
 
-    @Then("record is created successfully")
-    public void recordIsCreatedSuccessfully(DataTable table) {
+    @Then("record is executed successfully")
+    public void recordIsExecutedSuccessfully(DataTable table) {
         List<Map<String, String>> maps = table.asMaps(String.class, String.class);
         maps.forEach(map -> {
             Set<String> keys = map.keySet();
@@ -158,6 +158,12 @@ public class Stepdefs extends Utils {
     @When("update an existing student record")
     public void updateAnExistingStudentRecord(DataTable dataTable) throws IOException {
         CloseableHttpResponse response = putResponse(url_students, createRequestBody(dataTable));
+        ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+    }
+
+    @When("delete an existing student record")
+    public void deleteAnExistingStudentRecord(DataTable dataTable) throws IOException {
+        CloseableHttpResponse response = deleteResponse(url_get_students, createRequestBody(dataTable));
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
     }
 }

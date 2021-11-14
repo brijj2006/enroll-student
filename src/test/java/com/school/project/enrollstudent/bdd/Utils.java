@@ -1,10 +1,8 @@
 package com.school.project.enrollstudent.bdd;
 
 import io.cucumber.datatable.DataTable;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.*;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -14,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,6 +70,23 @@ public class Utils {
         return response;
     }
 
+    /*execute delete request*/
+    public CloseableHttpResponse deleteResponse(String uri, String requestBody) throws IOException {
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(uri);
+
+        /*set request body*/
+        StringEntity stringEntity = new StringEntity(requestBody);
+        httpDelete.setEntity(stringEntity);
+
+        /*set request headers*/
+        httpDelete.setHeader("Accept", header_accept);
+        httpDelete.setHeader("Content-Type", header_contentType);
+
+        CloseableHttpResponse response = client.execute(httpDelete);
+        return response;
+    }
+
     /*create request body using input parameters from data table*/
     public String createRequestBody(DataTable dataTable) {
         StringBuilder requestBody = new StringBuilder();
@@ -80,7 +96,11 @@ public class Utils {
         for (Map map : maps) {
             Set<String> keys = map.keySet();
             for (String key : keys) {
-                requestBody.append("\"" + key + "\" : \"" + map.get(key) + "\"");
+                if (key.equals("id")) {
+                    requestBody.append("\"" + key + "\" : " + map.get(key));
+                } else {
+                    requestBody.append("\"" + key + "\" : \"" + map.get(key) + "\"");
+                }
                 if (i == keys.size()) {
                     break;
                 } else {
@@ -92,5 +112,6 @@ public class Utils {
         }
         return (requestBody.toString());
     }
+
 
 }
