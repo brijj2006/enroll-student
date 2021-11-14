@@ -156,9 +156,14 @@ public class Stepdefs extends Utils {
     }
 
     @When("update an existing student record")
-    public void updateAnExistingStudentRecord(DataTable dataTable) throws IOException {
+    public void updateAnExistingStudentRecord(DataTable dataTable) throws IOException, JSONException {
         CloseableHttpResponse response = putResponse(url_students, createRequestBody(dataTable));
         ResponseContext.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+        if (response.getStatusLine().getStatusCode() == 404) {
+            String json = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+            JSONObject jsonObject = new JSONObject(json);
+            ResponseContext.setMessage(jsonObject.getString("message"));
+        }
     }
 
     @When("delete an existing student record")

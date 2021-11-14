@@ -20,6 +20,18 @@ Feature: Negative Scenarios - Search and get the student details who are enrolle
       | status | message                                 |
       | 404    | no student record found for class : 10A |
 
+  @regression
+  @negative
+  @update_student
+  Scenario: Verify the error if the student is updated for the non-existing record
+    Given user is entitled to access the school record
+    When update an existing student record
+      | id   | firstName | lastName | className | nationality |
+      | 9999 | Glen      | MacGrath | 10B       | Australian  |
+    Then record is executed successfully
+      | status | message                               |
+      | 404    | student does not exist with Id : 9999 |
+
 #  @regression
 #  @negative
 #  @delete_student
